@@ -1,0 +1,8 @@
+# Expected result of `python check_calls.py` for this open-source Kortix policy example.
+read-inbox        run    default_mode: risk, gmail.get_* always_run
+reply-internal    run    gmail.send_email always_run when to matches *@yourcompany.com
+reply-external    held   gmail.send_* require_approval (internal-only rule did not match)
+read-balance      run    stripe.get_* always_run
+refund-small      held   stripe.create_refund require_approval
+refund-large      held   project-wide stripe.refund require_approval (amount >= 1000)
+delete-customer   blocked project-wide *.*delete* block
