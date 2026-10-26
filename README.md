@@ -138,3 +138,7 @@ Kortix Cloud, in your VPC, or on your own on-prem network.
 rule order over a fixed list of calls, and its `default_mode: risk` heuristic
 treats actions whose names start with `get_`, `list_`, `search_`, `retrieve` or
 `read_` as reads. Kortix itself decides that, and it decides on live calls.
+
+## Where the site takes each case further
+
+The site that goes with this repo makes the same argument one question at a time. If the definition is the part you need, [what human in the loop means for an agent](https://humanintheloopvshumanontheloop.com/human-in-the-loop) is the page that starts from the approve-before-act model. For the other mode, [human on the loop](https://humanintheloopvshumanontheloop.com/human-on-the-loop) covers supervision with the power to stop a call, which is the mode this repo's Allow rows run under. The third position, where a person sets the goal and reads the outcome, is [human over the loop](https://humanintheloopvshumanontheloop.com/human-over-the-loop). When the argument in this repo has to become a decision for your own agent, [how to choose between the two models](https://humanintheloopvshumanontheloop.com/how-to-choose) turns the table above into questions about your own calls. And the mechanics of the held call, from the `202` record to the 24-hour expiry, are on the [approval workflow page](https://humanintheloopvshumanontheloop.com/approval-workflow).
