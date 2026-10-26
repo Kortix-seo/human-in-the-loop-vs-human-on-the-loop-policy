@@ -1,0 +1,54 @@
+# Example approval policy for an agent that touches a support inbox and Stripe.
+# Schema: kortix_version 2. Rules are evaluated per call, first match wins.
+kortix_version: 2
+default_agent: support
+
+policy:
+  # risk = reads run, writes and destructive actions wait for a person.
+  # allow_all (Kortix's default) runs every action no rule matched.
+  default_mode: risk
+
+policies:
+  # Project-wide rules use fully qualified patterns (connector.action).
+  # A connector rule cannot override them.
+  - match: "*.*delete*"
+    action: block
+  - match: "stripe.refund"
+    action: require_approval
+    conditions:
+      - arg: amount
+        match: "[0-9][0-9][0-9][0-9]*"   # any refund of 1000 or more (minor units)
+
+connectors:
+  - slug: gmail
+    name: Gmail
+    provider: openapi
+    spec: https://raw.githubusercontent.com/google/gmail-openapi/main/gmail.openapi.yaml
+    policies:
+      # Connector rules use patterns relative to the connector, and the first
+      # match wins: the narrow rule has to come before the wide one.
+      - match: "send_email"
+        action: always_run
+        conditions:
+          - arg: to
+            match: "*@yourcompany.com"    # internal recipients only
+      - match: "send_*"
+        action: require_approval
+      - match: "get_*"
+        action: always_run
+  - slug: stripe
+    name: Stripe
+    provider: openapi
+    spec: https://raw.githubusercontent.com/stripe/openapi/master/openapi/spec3.json
+    policies:
+      - match: "get_*"
+        action: always_run
+      - match: "create_refund"
+        action: require_approval
+    # sensitive: true makes every remaining action need approval, reads included.
+
+agents:
+  support:
+    connectors: [gmail, stripe]
+    secrets: none
+    kortix_permissions: none
