@@ -1,0 +1,44 @@
+[
+  {
+    "id": "read-inbox",
+    "connector": "gmail",
+    "action": "get_messages",
+    "arguments": {"query": "is:unread newer_than:1d"}
+  },
+  {
+    "id": "reply-internal",
+    "connector": "gmail",
+    "action": "send_email",
+    "arguments": {"to": "ops@yourcompany.com", "subject": "Ticket 4821"}
+  },
+  {
+    "id": "reply-external",
+    "connector": "gmail",
+    "action": "send_email",
+    "arguments": {"to": "customer@example.org", "subject": "Ticket 4821"}
+  },
+  {
+    "id": "read-balance",
+    "connector": "stripe",
+    "action": "get_balance",
+    "arguments": {}
+  },
+  {
+    "id": "refund-small",
+    "connector": "stripe",
+    "action": "create_refund",
+    "arguments": {"charge": "ch_3P", "amount": 400}
+  },
+  {
+    "id": "refund-large",
+    "connector": "stripe",
+    "action": "refund",
+    "arguments": {"charge": "ch_3P", "amount": 2500}
+  },
+  {
+    "id": "delete-customer",
+    "connector": "stripe",
+    "action": "delete_customer",
+    "arguments": {"id": "cus_9"}
+  }
+]
