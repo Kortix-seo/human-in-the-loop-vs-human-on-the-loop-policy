@@ -10,7 +10,7 @@ before anyone connects a real account.
 It is a companion to
 [human in the loop vs human on the loop](https://humanintheloopvshumanontheloop.com),
 and the policy format is
-[Kortix](https://kortix.com), the open-source AI Operating System.
+[Kortix](https://kortix.com), the open-source CompanyOS.
 
 ## The distinction is per action, not per system
 
