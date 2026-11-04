@@ -131,7 +131,7 @@ Kortix Cloud, in your VPC, or on your own on-prem network.
 
 - Source of the policy semantics:
   [connectors](https://kortix.com/docs/connect/connectors)
-- [Kortix on GitHub](https://github.com/kortix-ai/suna)
+- [Kortix on GitHub](https://github.com/kortix-ai/CompanyOS)
 - [kortix.com](https://kortix.com)
 
 `check_calls.py` is a reading aid, not the product: it replays the documented
